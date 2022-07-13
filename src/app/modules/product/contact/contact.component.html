@@ -1,0 +1,371 @@
+<div class="container mt-5" id="contactForm">
+  <div class="card">
+    <div class="card-block">
+      <h4 class="card-title">Contact</h4>
+      <div>
+        <form [formGroup]="contactForm">
+          <div class="form-group mt-3" *ngFor="let data of formData">
+            <label class="me-2"
+              >{{
+                data.label === "tnc"
+                  ? "Terms and conditions"
+                  : (data.label | titlecase)
+              }}
+              {{ _contactForm["tnc"].value }}
+              :
+            </label>
+            <input
+              *ngIf="
+                data.label !== 'birthDate' &&
+                data.label !== 'tnc' &&
+                data.label !== 'gender'
+              "
+              type="{{ data?.type }}"
+              formControlName="{{ data?.label }}"
+              [ngClass]="{ 'form-control mt-2': data?.label !== 'tnc' }"
+              [name]="data?.label"
+              placeholder="{{ data?.label | titlecase }}"
+              (keypress)="myValidationFunction($event, data.label)"
+            />
+            <input
+              *ngIf="data.label === 'birthDate'"
+              class="form-control mt-2"
+              placeholder="{{ data.label | titlecase }}"
+              formControlName="{{ data.label }}"
+              bsDatepicker
+              [maxDate]="maxDate"
+              [bsConfig]="{ containerClass: 'theme-default' }"
+            />
+            <input
+            id="male"
+            *ngIf="data.label === 'gender'"
+            type="radio"
+            value="male"
+            name="gender"
+            class="me-1"
+            formControlName="gender"
+          />
+          <label *ngIf="data.label === 'gender'" for="male" class="me-2">Male</label>
+            <input
+            *ngIf="data.label === 'gender'"
+            id="female"
+            type="radio"
+            value="female"
+            name="gender"
+            class="me-1"
+            formControlName="gender"
+          />
+          <label *ngIf="data.label === 'gender'" for="female">Female</label>
+            <input
+              *ngIf="data.label === 'tnc'"
+              type="checkbox"
+              formControlName="tnc"
+            />
+            <small
+              class="text-danger"
+              *ngIf="
+                _contactForm[data.label].invalid &&
+                (isFormSubmitted || _contactForm[data.label].touched)
+              "
+            >
+              <small *ngIf="_contactForm[data.label].errors?.['required']"
+                >{{ data.label | titlecase }} is required</small
+              >
+              <small *ngIf="_contactForm[data.label].errors?.['email']"
+                >{{ data.label | titlecase }} is invalid</small
+              >
+              <small *ngIf="_contactForm[data.label].errors?.['minlength']"
+                >{{ data.label | titlecase }} should have atleast
+                {{ _contactForm[data.label].errors?.['minlength'].requiredLength }}
+                chars</small
+              >
+              <small *ngIf="_contactForm[data.label].errors?.['maxlength']"
+                >{{ data.label | titlecase }} should have maimum
+                {{ _contactForm[data.label].errors?.['maxlength'].requiredLength }}
+                chars</small
+              >
+              <small *ngIf="_contactForm[data.label].errors?.['pattern']"
+                >Only numeric value allowed</small
+              >
+              <small *ngIf="_contactForm[data.label].errors?.['min']"
+                >Min value
+                {{ _contactForm[data.label].errors?.['min'].min }}</small
+              >
+            </small>
+            <small
+              class="text-danger"
+              *ngIf="data.label === 'confirmPassword' && contactForm.errors?.['passwordMatch'] && _contactForm[data.label].touched &&  _contactForm[data.label].valid "
+              >{{ data.label | titlecase }} is not match</small
+            >
+          </div>
+
+          <!-- <div class="form-group">
+            <label for="exampleInputName">Name : </label>
+            <input
+              type="text"
+              formControlName="name"checkbox
+            />
+            <small
+              class="text-danger"
+              *ngIf="
+                _contactForm['name'].invalid &&
+                (isFormSubmitted || _contactForm['name'].touched)
+              "
+            >
+              <small *ngIf="_contactForm['name'].errors?.['required']"
+                >Name is required</small
+              >
+              <small *ngIf="_contactForm['name'].errors?.['minlength']"
+                >Name should have atleast 2 chars</small
+              >
+              <small *ngIf="_contactForm['name'].errors?.['maxlength']"
+                >Name should have maimum 10 chars</small
+              >
+            </small>
+          </div>
+          <div class="form-group mt-3">
+            <label for="exampleInputEmail1">Email : </label>
+            <input
+              type="email"
+              formControlName="email"
+              class="form-control mt-2"
+              id="exampleInputEmail1"
+              placeholder="Email"
+            />
+            <small
+              class="text-danger"
+              *ngIf="
+                _contactForm['email'].invalid &&
+                (isFormSubmitted || _contactForm['email'].touched)
+              "
+            >
+              <small *ngIf="_contactForm['email'].errors?.['required']"
+                >Email is required</small
+              >
+              <small *ngIf="_contactForm['email'].errors?.['email']"
+                >Email is invalid</small
+              >
+            </small>
+          </div>
+          <div class="form-group mt-3">
+            <label for="exampleTextareaDetail">Details : </label>
+            <textarea
+              formControlName="details"
+              class="form-control mt-2"
+              id="exampleTextareaDetail"
+              placeholder="Details"
+            ></textarea>
+            <small
+              class="text-danger"
+              *ngIf="
+                _contactForm['details'].invalid &&
+                (isFormSubmitted || _contactForm['details'].touched)
+              "
+            >
+              <small *ngIf="_contactForm['details'].errors?.['required']"
+                >Details is required</small
+              >
+            </small>
+          </div>
+          <div class="form-group mt-3">
+            <label for="exampleInputPassword1">Password : </label>
+            <input
+              type="password"
+              formControlName="password"
+              class="form-control mt-2"
+              id="exampleInputPassword1"
+              placeholder="Password"
+            />
+            <small
+              class="text-danger"
+              *ngIf="
+                _contactForm['password'].invalid &&
+                (isFormSubmitted || _contactForm['password'].touched)
+              "
+            >
+              <small *ngIf="_contactForm['password'].errors?.['required']"
+                >Password is required</small
+              >
+              <small *ngIf="_contactForm['password'].errors?.['minlength']"
+                >Password should have atleast 2 chars</small
+              >
+              <small *ngIf="_contactForm['password'].errors?.['maxlength']"
+                >Password should have maimum 10 chars</small
+              >
+            </small>
+          </div>
+          <div class="form-group mt-3">
+            <label for="exampleInputPassword2">Confirm Password : </label>
+            <input
+              type="password"
+              formControlName="confirmPassword"
+              class="form-control mt-2"
+              id="exampleInputPassword2"
+              placeholder="Confirm Password"
+            />
+            <small
+              class="text-danger"
+              *ngIf="
+                _contactForm['confirmPassword'].invalid &&
+                (isFormSubmitted || _contactForm['confirmPassword'].touched)
+              "
+            >
+              <small
+                *ngIf="_contactForm['confirmPassword'].errors?.['required']"
+                >Confirm Password is required</small
+              >
+              <small
+                *ngIf="_contactForm['confirmPassword'].errors?.['minlength']"
+                >Confirm Password should have atleast 2 chars</small
+              >
+              <small
+                *ngIf="_contactForm['confirmPassword'].errors?.['maxlength']"
+                >Confirm Password should have maimum 10 chars</small
+              >
+            </small>
+            <small
+              class="text-danger"
+              *ngIf="contactForm.errors?.['passwordMatch'] && _contactForm['confirmPassword'].touched &&  _contactForm['confirmPassword'].valid "
+              >Confirm Password is not match</small
+            >
+          </div>
+          <div class="form-group mt-3">
+            <label for="exampleInputAge">Age : </label>
+            <input
+              type="text"
+              formControlName="age"
+              class="form-control mt-2"
+              id="exampleInputAge"
+              placeholder="Age"
+              (keypress)="myValidationFunction($event)"
+            />
+            <small
+              class="text-danger"
+              *ngIf="
+                _contactForm['age'].invalid &&
+                (isFormSubmitted || _contactForm['age'].touched)
+              "
+            >
+              <small *ngIf="_contactForm['age'].errors?.['required']"
+                >Age is required</small
+              >
+              <small *ngIf="_contactForm['age'].errors?.['pattern']"
+                >Only numeric value allowed</small
+              >
+            </small>
+          </div>
+
+          <div class="form-group mt-3">
+            <label for="exampleInputDate">BirthDate : </label>
+            <input
+              class="form-control mt-2"
+              placeholder="Datepicker"
+              formControlName="birthDate"
+              bsDatepicker
+              id="exampleInputDate"
+              [maxDate]="maxDate"
+              [bsConfig]="{ containerClass: 'theme-default' }"
+            />
+            <small
+              class="text-danger"
+              *ngIf="
+                _contactForm['birthDate'].invalid &&
+                (isFormSubmitted || _contactForm['birthDate'].touched)
+              "
+            >
+              <small *ngIf="_contactForm['birthDate'].errors?.['required']"
+                >Birthdate is required</small
+              >
+            </small>
+          </div>
+          <div class="form-group mt-3">
+            <label for="exampleInputRadio" class="me-3">Gender : </label>
+            <input
+              id="male"
+              type="radio"
+              value="male"
+              name="gender"
+              class="me-1"
+              formControlName="gender"
+            />
+            <label for="male" class="me-2">Male</label>
+            <input
+              id="female"
+              type="radio"
+              value="female"
+              name="gender"
+              class="me-1"
+              formControlName="gender"
+            />
+            <label for="female">Female</label>
+            <small
+              class="text-danger"
+              *ngIf="
+                _contactForm['gender'].invalid &&
+                (isFormSubmitted || _contactForm['gender'].touched)
+              "
+            >
+              <small *ngIf="_contactForm['gender'].errors?.['required']"
+                >Gender is required</small
+              >
+            </small>
+          </div>
+          <div class="form-group mt-3">
+            <label for="exampleInputCheckbox" class="me-3"
+              >Terms and conditions :
+            </label>
+            <input
+              type="checkbox"
+              formControlName="tnc"
+              id="exampleInputCheckbox"
+            />
+            <small
+              class="text-danger"
+              *ngIf="
+                _contactForm['tnc'].invalid &&
+                (isFormSubmitted || _contactForm['tnc'].touched)
+              "
+            >
+              <small *ngIf="_contactForm['tnc'].errors?.['required']"
+                >Please check terms and conditions</small
+              >
+            </small>
+          </div> -->
+          <!-- 
+          <div class="form-group mt-3">
+            <label for="exampleInputCheckbox" class="me-3"
+              >Terms and conditions :
+            </label>
+            <input
+              type="checkbox"
+              formControlName="tnc"
+              id="exampleInputCheckbox"
+            />
+            <small
+              class="text-danger"
+              *ngIf="
+                _contactForm['tnc'].invalid &&
+                (isFormSubmitted || _contactForm['tnc'].touched)
+              "
+            >
+              <small *ngIf="_contactForm['tnc'].errors?.['required']"
+                >Please check terms and conditions</small
+              >
+            </small>
+          </div>  -->
+
+          <button
+            type="submit"
+            (click)="onSubmit()"
+            class="btn btn-dark mt-3 me-3"
+          >
+            Submit
+          </button>
+          <button type="submit" (click)="onClear()" class="btn btn-dark mt-3">
+            Clear
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

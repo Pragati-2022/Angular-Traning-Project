@@ -1,0 +1,266 @@
+<div class="container mt-5">
+  <div class="card">
+    <div class="card-block">
+      <h4 class="card-title"></h4>
+      <div>
+        <form class="mt-3" [formGroup]="aboutForm">
+          <div class="form-group">
+            <label for="exampleInputName">Full Name : </label>
+            <input
+              type="text"
+              class="form-control mt-2"
+              id="exampleInputName"
+              placeholder="Full Name"
+              formControlName="name"
+            />
+            <small
+              class="text-danger"
+              *ngIf="
+                _aboutForm['name'].invalid &&
+                (_aboutForm['name'].touched || isFormSubmitted)
+              "
+            >
+              <small *ngIf="_aboutForm['name'].errors?.['required']"
+                >Name is required</small
+              >
+            </small>
+          </div>
+          <div class="form-group mt-3">
+            <label for="exampleInputRadio" class="me-3"
+              >Contact Preference :
+            </label>
+            <input
+              id="email"
+              type="radio"
+              value="email"
+              name="contact"
+              class="me-1"
+              formControlName="contact"
+              (change)="onChangePreference($event)"
+            />
+            <label for="email" class="me-2">Email</label>
+            <input
+              id="phone"
+              type="radio"
+              value="phone"
+              name="contact"
+              class="me-1"
+              formControlName="contact"
+              (change)="onChangePreference($event)"
+            />
+            <label for="phone">Phone</label>
+            <div>
+              <small
+                class="text-danger"
+                *ngIf="
+                  _aboutForm['contact'].invalid &&
+                  (_aboutForm['contact'].touched || isFormSubmitted)
+                "
+              >
+                <small *ngIf="_aboutForm['contact'].errors?.['required']"
+                  >Please choose contact preference</small
+                >
+              </small>
+            </div>
+          </div>
+          <!-- <div formArrayName="preference">
+            <div *ngFor="let pre of _preference.controls; let i = index">
+              <div [formGroupName]="i"> -->
+                <div  class="form-group mt-3" *ngIf="_aboutForm['contact'].value === 'email'">
+                  <label for="exampleInputEmail1">Email : </label>
+                  <input
+                    type="email"
+                    class="form-control mt-2"
+                    id="exampleInputEmail1"
+                    placeholder="Email"
+                    formControlName="email"
+                  />
+                  <small
+                    class="text-danger"
+                    *ngIf="
+                      _aboutForm['email']?.invalid &&
+                      (_aboutForm['email']?.touched || isFormSubmitted)
+                    "
+                  >
+                    <small *ngIf=" _aboutForm['email']?.errors?.['required']"
+                      >Email is required</small
+                    >
+                    <small *ngIf="_aboutForm['email']?.errors?.['pattern']"
+                      >Email is invalid</small
+                    >
+                  </small>
+                </div>
+                <div class="form-group mt-3" *ngIf="_aboutForm['contact'].value === 'email'">
+                  <label for="exampleInputEmail2">Confirm Email : </label>
+                  <input
+                    type="email"
+                    class="form-control mt-2"
+                    id="exampleInputEmail2"
+                    placeholder="Confirm Email"
+                    formControlName="confirmEmail"
+                  />
+                  <small
+                    class="text-danger"
+                    *ngIf="
+                    _aboutForm['confirmEmail']?.invalid &&
+                      (_aboutForm['confirmEmail']?.touched || isFormSubmitted)
+                    "
+                  >
+                    <small
+                      *ngIf=" _aboutForm['confirmEmail']?.errors?.['required']"
+                      >Confirm Email is required</small
+                    >
+                    <small *ngIf=" _aboutForm['confirmEmail']?.errors?.['pattern']"
+                      >Confirm Email is invalid</small
+                    >
+                  </small>
+                  <small
+                    class="text-danger"
+                    *ngIf="aboutForm.errors?.['emailMatch'] && _aboutForm['confirmEmail']?.touched &&  _aboutForm['confirmEmail']?.valid "
+                    >Confirm email is not match</small
+                  >
+                </div>
+                <div class="form-group mt-3" *ngIf="_aboutForm['contact'].value === 'phone'">
+                  <label for="exampleInputPhone">Phone : </label>
+                  <input
+                    type="text"
+                    class="form-control mt-2"
+                    id="exampleInputPhone"
+                    placeholder="Phone"
+                    formControlName="phone"
+                    (keypress)="myNumberValidationFunction($event)"
+                  />
+                  <small
+                    class="text-danger"
+                    *ngIf="
+                       _aboutForm['phone']?.invalid &&
+                      ( _aboutForm['phone']?.touched || isFormSubmitted)
+                    "
+                  >
+                    <small *ngIf="  _aboutForm['phone']?.errors?.['required']"
+                      >Phone is required</small
+                    >
+                    <small
+                      *ngIf=" _aboutForm['phone']?.errors?.['minlength'] ||  _aboutForm['phone']?.errors?.['maxlength']"
+                      >Phone should have maximum and minimum 10 length</small
+                    >
+                  </small>
+                </div>
+              <!-- </div> -->
+            <!-- </div> -->
+          <!-- </div> -->
+          <hr />
+          <div formArrayName="skills">
+            <p>
+              <button type="button" (click)="addSkills()">Add Skill</button>
+            </p>
+            <div *ngFor="let skill of _skills.controls; let i = index">
+              <p>{{ this.skill.value | json }}</p>
+              <div [formGroupName]="i">
+                <div class="form-group mt-3">
+                  <label for="exampleInputSkill">Skill : </label>
+                  <input
+                    type="text"
+                    class="form-control mt-2"
+                    id="exampleInputSkill"
+                    placeholder="C#, Java, Angular etc.."
+                    formControlName="skill"
+                  />
+                  <small
+                    class="text-danger"
+                    *ngIf="
+                      skill.get('skill')?.invalid &&
+                      (skill.get('skill')?.touched || isFormSubmitted)
+                    "
+                  >
+                    <small *ngIf=" skill.get('skill')?.errors?.['required']"
+                      >Skill is required</small
+                    >
+                  </small>
+                </div>
+                <div class="form-group mt-3">
+                  <label for="exampleInputExperience">Experience : </label>
+                  <input
+                    type="text"
+                    class="form-control mt-2"
+                    id="exampleInputExperience"
+                    placeholder="In Years"
+                    formControlName="experience"
+                    (keypress)="myNumberValidationFunction($event)"
+                  />
+                  <small
+                    class="text-danger"
+                    *ngIf="
+                      skill.get('experience')?.invalid &&
+                      (skill.get('experience')?.touched || isFormSubmitted)
+                    "
+                  >
+                    <small
+                      *ngIf=" skill.get('experience')?.errors?.['required']"
+                      >Experience is required</small
+                    >
+                    <small
+                      *ngIf=" skill.get('experience')?.errors?.['maxlength']"
+                      >Experience should have maximum 2 chars</small
+                    >
+                  </small>
+                </div>
+                <div class="form-group mt-3">
+                  <label for="exampleInputRadio2" class="me-3"
+                    >Proficiency :
+                  </label>
+                  <input
+                    id="beginner"
+                    type="radio"
+                    value="beginner"
+                    name="proficiency"
+                    class="me-1"
+                    formControlName="proficiency"
+                  />
+                  <label for="beginner" class="me-2">Beginner</label>
+                  <input
+                    id="intermediate"
+                    type="radio"
+                    value="intermediate"
+                    name="proficiency"
+                    class="me-1"
+                    formControlName="proficiency"
+                  />
+                  <label for="intermediate">Intermediate</label>
+                  <input
+                    id="advanced"
+                    type="radio"
+                    value="advanced"
+                    name="proficiency"
+                    class="me-1"
+                    formControlName="proficiency"
+                  />
+                  <label for="advanced">Advanced</label>
+                  <div>
+                    <small
+                      class="text-danger"
+                      *ngIf="
+                        skill.get('proficiency')?.invalid &&
+                        (skill.get('proficiency')?.touched || isFormSubmitted)
+                      "
+                    >
+                      <small
+                        *ngIf=" skill.get('proficiency')?.errors?.['required']"
+                        >Proficiency is required</small
+                      >
+                    </small>
+                  </div>
+                </div>
+                <button (click)="removeSkill(i)">Remove</button>
+              </div>
+            </div>
+          </div>
+
+          <button type="submit" [disabled]="!aboutForm.valid" (click)="onSubmit()" class="btn btn-dark mt-3">
+            Submit
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

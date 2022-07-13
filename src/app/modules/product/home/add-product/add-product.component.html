@@ -1,0 +1,200 @@
+<div class="container mt-5">
+  <div class="card">
+    <div class="card-block">
+      <h4 class="card-title">Login</h4>
+      <div>
+        <form class="mt-3" [formGroup]="addProducForm">
+          <div class="form-group">
+            <label for="exampleInputName">Name : </label>
+            <input
+              type="text"
+              formControlName="name"
+              class="form-control mt-2"
+              id="exampleInputName"
+              placeholder="Name"
+            />
+            <small
+              class="text-danger"
+              *ngIf="
+                _addProducForm['name'].invalid &&
+                (isFormSubmitted || _addProducForm['name'].touched)
+              "
+            >
+              <small *ngIf="_addProducForm['name'].errors?.['required']"
+                >Name is required</small
+              >
+            </small>
+          </div>
+
+          <div class="form-group mt-3">
+            <label for="exampleInputFile">Image : </label>
+            <input
+              type="file"
+              formControlName="image"
+              class="form-control mt-2"
+              id="exampleInputFile"
+              placeholder="Image"
+            />
+            <small
+              class="text-danger"
+              *ngIf="
+                _addProducForm['image'].invalid &&
+                (isFormSubmitted || _addProducForm['image'].touched)
+              "
+            >
+              <small *ngIf="_addProducForm['image'].errors?.['required']"
+                >Image is required</small
+              >
+            </small>
+          </div>
+
+          <div class="form-group mt-3">
+            <label for="exampleInputQuantity">Quantity : </label>
+            <input
+              type="text"
+              formControlName="quantity"
+              class="form-control mt-2"
+              id="exampleInputQuantity"
+              placeholder="Quantity"
+            />
+            <small
+              class="text-danger"
+              *ngIf="
+                _addProducForm['quantity'].invalid &&
+                (isFormSubmitted || _addProducForm['quantity'].touched)
+              "
+            >
+              <small *ngIf="_addProducForm['quantity'].errors?.['required']"
+                >Quantity is required</small
+              >
+            </small>
+          </div>
+
+          <div class="form-group mt-3">
+            <label for="exampleInputColor">Color : </label>
+            <input
+              type="color"
+              formControlName="color"
+              class="form-control mt-2"
+              id="exampleInputColor"
+              placeholder="Color"
+            />
+            <small
+              class="text-danger"
+              *ngIf="
+                _addProducForm['color'].invalid &&
+                (isFormSubmitted || _addProducForm['color'].touched)
+              "
+            >
+              <small *ngIf="_addProducForm['color'].errors?.['required']"
+                >Color is required</small
+              >
+            </small>
+          </div>
+
+          <div class="form-group mt-3">
+            <label for="exampleInputPrice">Price : </label>
+            <input
+              type="text"
+              formControlName="price"
+              class="form-control mt-2"
+              id="exampleInputPrice"
+              placeholder="Price"
+            />
+            <small
+              class="text-danger"
+              *ngIf="
+                _addProducForm['price'].invalid &&
+                (isFormSubmitted || _addProducForm['price'].touched)
+              "
+            >
+              <small *ngIf="_addProducForm['price'].errors?.['required']"
+                >Price is required</small
+              >
+            </small>
+          </div>
+
+          <div class="form-group mt-3">
+            <label for="exampleInputReview">Review : </label>
+            <!-- <input
+              type="text"
+              formControlName="review"
+              class="form-control mt-2"
+              id="exampleInputReview"
+              placeholder="Review"
+            /> -->
+          </div>
+
+          <div class="btn-group" dropdown>
+            <button
+              id="button-basic"
+              dropdownToggle
+              type="button"
+              class="form-control dropdown-toggle mt-2"
+              aria-controls="dropdown-basic"
+            >
+              {{ selectedOption }} <span class="caret"></span>
+            </button>
+
+            <ul
+              id="dropdown-basic"
+              *dropdownMenu
+              class="dropdown-menu"
+              role="menu"
+              aria-labelledby="button-basic"
+            >
+              <li
+                role="menuitem"
+                *ngFor="let option of options"
+                (click)="changeSelectedOption(option)"
+              >
+                <span class="dropdown-item">
+                  {{ option }}
+                </span>
+              </li>
+            </ul>
+          </div>
+          <div>
+          <small
+            class="text-danger"
+            *ngIf="
+              _addProducForm['review'].invalid &&
+              (isFormSubmitted || _addProducForm['review'].touched)
+            "
+          >
+            <small *ngIf="_addProducForm['review'].errors?.['required']"
+              >Review is required</small
+            >
+          </small>
+        </div>
+
+          <div class="form-group mt-3">
+            <label for="exampleInputDescription">Description : </label>
+            <input
+              type="text"
+              formControlName="description"
+              class="form-control mt-2"
+              id="exampleInputDescription"
+              placeholder="Description"
+            />
+            <small
+              class="text-danger"
+              *ngIf="
+                _addProducForm['description'].invalid &&
+                (isFormSubmitted || _addProducForm['description'].touched)
+              "
+            >
+              <small *ngIf="_addProducForm['description'].errors?.['required']"
+                >Description is required</small
+              >
+            </small>
+          </div>
+
+          <button type="submit" (click)="onSubmit()" class="btn btn-dark mt-3">
+            Submit
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

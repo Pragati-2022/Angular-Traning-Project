@@ -1,0 +1,55 @@
+{
+  "login": {
+    "title": "Login Form",
+    "username.label": "Username",
+    "password.label": "Password",
+    "message": "is required"
+  },
+  "BUTTON": {
+    "LOGIN": "Signin",
+    "NEXT": "Next",
+    "SUBMIT" : "Submit"
+  },
+  "TITLE": {
+    "HOME": "Home",
+    "ABOUT": "About",
+    "CONTACT": "Contact",
+    "SEARCH_FILTER": "SearchFilter",
+    "MULTISEARCH_FILTER": "MultisearchFilter",
+    "API": "API",
+    "MULTISTEP": "MultiStep",
+    "ARRAY_METHODS" : "Array Methods",
+    "LOGIN": "Login",
+    "CHOOSE_LANG": "Choose Lang",
+    "CHOOSE_LANG_LINK": {
+      "ENGLISH": "English",
+      "FRENCH": "French"
+    },
+    "METHODS" : {
+      "STRING" : "String's Mehods",
+      "NUMBER" : "Number's Methods",
+      "DATE" : "Date's Methods",
+      "ARRAY" : "Array's Methods"
+    }
+  },
+  "ACCOUNT_TITLE": "Account Details",
+  "PERSONAL_TITLE": "Personal Details",
+
+  "LABEL": {
+		"NAME":"Name",
+		"EMAIL":"Email",
+    "PASSWORD":"Password",
+    "FULL_NAME" : "Full Name",
+    "COUNTRY" : "Country",
+    "ABOUT" : "About"
+	},
+  "PLACEHOLDER" : {
+    "ABOUT" : "Who you are..."
+  },
+  "MESSAGE": {
+    "REQUIRED": "is required !",
+    "EMAIL": "is invalid !",
+    "MINLENGTH" : "at least 6 characters long !",
+    "MAXLENGTH" : "length maximum is 20 !"
+  }
+}

@@ -1,0 +1,55 @@
+{
+  "login": {
+    "title": "Formulaire De Connexion",
+    "username.label": "Nom d'utilisateur",
+    "password.label": "Mot de passe",
+    "message": "est requis"
+  },
+  "BUTTON": {
+    "LOGIN": "S'identifier",
+    "NEXT": "Prochain",
+    "SUBMIT" : "Soumettre"
+  },
+  "TITLE": {
+    "HOME": "Maison",
+    "ABOUT": "À propos de",
+    "CONTACT": "Contact",
+    "SEARCH_FILTER": "Filtre de recherche",
+    "MULTISEARCH_FILTER": "MultisearchFiltre",
+    "API": "API",
+    "MULTISTEP": "Multiétape",
+    "ARRAY_METHODS" : "Méthodes de tableau",
+    "LOGIN": "Connexion",
+    "CHOOSE_LANG": "Choisissez la langue",
+    "CHOOSE_LANG_LINK": {
+      "ENGLISH": "Anglaise",
+      "FRENCH": "Française"
+    },
+    "METHODS" : {
+      "STRING" : "Méthodes de chaîne",
+      "NUMBER" : "Méthodes des nombres",
+      "DATE" : "Méthodes de date",
+      "ARRAY" : "Méthodes de tableau"
+    }
+  },
+  "ACCOUNT_TITLE": "Détails du compte",
+  "PERSONAL_TITLE": "Détails personnels",
+
+  "LABEL": {
+    "NAME": "Nom",
+    "EMAIL": "E-mail",
+    "PASSWORD": "Mot de passe",
+    "FULL_NAME": "Nom et prénom",
+    "COUNTRY": "Pays",
+    "ABOUT": "À propos de"
+  },
+  "PLACEHOLDER": {
+    "ABOUT": "Qui tu es..."
+  },
+  "MESSAGE": {
+    "REQUIRED": "est requis !",
+    "EMAIL": "est invalide !",
+    "MINLENGTH": "au moins 6 caractères !",
+    "MAXLENGTH": "la longueur maximale est de 20 !"
+  }
+}

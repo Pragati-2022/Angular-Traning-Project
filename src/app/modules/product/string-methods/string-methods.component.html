@@ -1,0 +1,76 @@
+<div>
+  <p [ngStyle]="{ width: '900px' }" class="m-auto">
+    Slice, substr and subString difference - Syntex string.slice(start,end)
+    string.substr(start,length) string.substring(start,end) Note #1:
+    slice()==substring() - What does it do? slice() extracts parts of a string
+    and returns the extracted parts in a new string. substr() extracts parts of
+    a string, beginning at the character at the specified position, and returns
+    the specified number of characters. substring() extracts parts of a string
+    and returns the extracted parts in a new string. Note #2:
+    slice()==substring() - Change the Original String? No (all are same) - Using
+    Negative Numbers as an Argument slice() selects characters starting from the
+    end of the string substr() selects characters starting from the end of the
+    string substring() doesn't perform Note #4: slice()==substr() - If the First
+    Argument is Greater than the Second slice() doesn't perform substr() since
+    the Second Argument is NOT a position, but length value, it will perform as
+    usual, with no problems substring() will swap the two arguments, and perform
+    as usual - What if the Second Argument is Omitted? selects all characters
+    from the start-position to the end of the string (all are same) `
+  </p>
+</div>
+
+<ng-container *ngFor="let type of types">
+  <app-header-title [ngClass]="{blue: isTrue(), bold: itTrue()}" [title]="type?.title"></app-header-title>
+  <app-method-card [ngStyle]="{'color': isTrue() ? '#5CFF8E' : '#F97FD0'}" [methods]="type?.name" (sendMethod)="onCard($event, type.methodName)">
+  </app-method-card>
+</ng-container>
+
+<!-- <app-header-title title="Number's Methods"></app-header-title>
+<app-method-card [methods]="numberMethods" (sendMethod)="onSubmit($event)">
+</app-method-card>
+
+<app-header-title title="Date's Methods"></app-header-title>
+<app-method-card
+  [methods]="dateMethods"
+  (sendMethod)="onDateMethodSubmit($event)"
+>
+</app-method-card> -->
+
+<!-- <div class="container mt-5">
+  <H1>Number Methods</H1>
+  <div class="card">
+    <div class="card-block">
+      <div class="row row-cols-1 row-cols-md-3 g-4">
+        <div class="col" *ngFor="let method of numberMethods">
+          <div class="card h-100">
+            <div class="card-body">
+              <h5 class="card-title">{{ method.name }} Method</h5>
+
+              <p class="card-text">{{ method.description }}</p>
+              <button (click)="onSubmit(method.name)">Demo</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+ 
+<div class="container mt-5">
+  <H1>Date Methods</H1>
+  <div class="card">
+    <div class="card-block">
+      <div class="row row-cols-1 row-cols-md-3 g-4">
+        <div class="col" *ngFor="let method of dateMethods">
+          <div class="card h-100">
+            <div class="card-body">
+              <h5 class="card-title">{{ method.name }} Method</h5>
+              <p class="card-text">{{ method.description }}</p>
+              <button (click)="onDateMethodSubmit(method.name)">Demo</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> -->

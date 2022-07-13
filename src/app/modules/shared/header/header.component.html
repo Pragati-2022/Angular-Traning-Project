@@ -1,0 +1,84 @@
+<nav ngxNavbarDynamicExpand class="navbar-dark bg-dark">
+  <div class="container-fluid">
+    <img src="assets/images/logo2.png" width="45" height="45" />
+
+    <!-- <a class="navbar-brand" href="">Bootstrap 5</a> -->
+    <button
+      class="navbar-toggler"
+      type="button"
+      (click)="collapse.toggle()"
+      aria-controls="main-nav"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span
+        class="navbar-toggler-icon d-flex align-items-center justify-content-center"
+      >
+      </span>
+    </button>
+    <ngx-navbar-collapse id="main-nav" #collapse="ngxNavbarCollapse">
+      <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+        <li class="nav-item active">
+          <a class="nav-link" routerLink="home" routerLinkActive="active"
+            >{{ "TITLE.HOME" | translate }}</a
+          >
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="about" routerLinkActive="active"
+            >{{ "TITLE.ABOUT" | translate }}</a
+          >
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="contact" routerLinkActive="active"
+            >{{ "TITLE.CONTACT" | translate }}</a
+          >
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="search" routerLinkActive="active"
+            >{{ "TITLE.SEARCH_FILTER" | translate }}</a
+          >
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="multiSearch" routerLinkActive="active"
+            >{{ "TITLE.MULTISEARCH_FILTER" | translate }}</a
+          >
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="api" routerLinkActive="active"
+            >{{ "TITLE.API" | translate }}</a
+          >
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="mutliStep" routerLinkActive="active"
+            >{{ "TITLE.MULTISTEP" | translate }}</a
+          >
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="arrayMethods" routerLinkActive="active"
+            >{{ "TITLE.ARRAY_METHODS" | translate }}</a
+          >
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="login" routerLinkActive="active"
+            >{{ "TITLE.LOGIN" | translate }}</a
+          >
+        </li>
+        <li class="nav-item" class="btn-group" dropdown placement="bottom right">
+          <a class="nav-link" dropdownToggle
+            >{{ "TITLE.CHOOSE_LANG" | translate }}</a
+          >
+          <ul id="dropdown-alignment" *dropdownMenu class="dropdown-menu dropdown-menu-right"
+                role="menu" aria-labelledby="button-alignment">
+              <li role="menuitem"><a class="dropdown-item" (click)="useLanguage('en')">{{ "TITLE.CHOOSE_LANG_LINK.ENGLISH" | translate }}</a></li>
+              <li role="menuitem"><a class="dropdown-item" (click)="useLanguage('fr')">{{ "TITLE.CHOOSE_LANG_LINK.FRENCH" | translate }}</a></li>
+            </ul>
+        </li>
+      </ul>
+    </ngx-navbar-collapse>
+    <span class="navbar-text">
+      <a class="nav-link" (click)="showModal()"
+        ><i-bs name="cart" width="45" height="25"></i-bs
+        ><span class="count">{{ favouriteTotal }}</span> </a>      
+    </span>
+  </div>
+</nav>

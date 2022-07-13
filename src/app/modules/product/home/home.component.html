@@ -1,0 +1,46 @@
+<div class="container mt-5" *ngIf="!productService.id">
+  <div class="card">
+    <img *ngIf="img" [src]="img" alt="" />
+    <button *ngIf="img" class="btn-dark" (click)="onBack()">Back</button>
+    <div class="card-block" *ngIf="!img">
+      <div class="row row-cols-1 row-cols-md-3 g-4">
+        <div class="col" *ngFor="let product of productService.products">
+          <div class="card h-100">
+            <img src="{{ product.image }}" appLongPress (mouseLongPress)="onLongPress(product.image)"
+              (click)="onLongPress(product.image)" class="card-img-top" alt="" />
+            <div class="card-body">
+              <h5 class="card-title">
+                {{ product.color | uppercase }} {{ product.name | lowercase }}
+                <i-bs name="star-fill" width="15" height="15" [ngStyle]="{ color: 'yellow' }"
+                  *ngFor="let review of arr(product.review).fill(1)">
+                </i-bs>
+              </h5>
+              <strong class="card-text" *appUnLess="condition">
+                {{ product.price | currency: "INR" }}
+              </strong>
+              <p class="card-text" [appHighlight]="design">
+                {{ product.description }} Highlight me!
+              </p>
+              <div class="btnBox">
+                <div class="row">
+                  <div class="col-sm-6">
+                    <button type="button" class="btn btn-outline-dark" (click)="onProductDetail(product.id)">
+                      Product Details
+                    </button>
+                  </div>
+                  <div class="col-sm-6">
+                    <button type="button" class="btn btn-outline-dark" (click)="onAddToCart(product)">
+                      Add to cart
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<router-outlet></router-outlet>

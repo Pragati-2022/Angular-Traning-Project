@@ -1,0 +1,59 @@
+<div class="model" *ngIf="cartService.cartItems.length; else noItem">
+  <div class="modal-body">
+    <table class="table text-center">
+      <tbody>
+        <tr *ngFor="let item of cartService.cartItems">
+          <td><img src="{{ item.image }}" width="100px" height="100px" /></td>
+          <td>
+            {{ item.color }} {{ item.name }}
+            <br />
+            {{ item.quantity }} x {{ item.price | currency: "INR" }}
+          </td>
+          <td>
+            <i-bs
+              name="trash-fill"
+              (click)="onDelete(item.id)"
+              width="35"
+              height="35"
+            >
+            </i-bs>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="mb-3">
+      <div class="row">
+        <div class="col-md-9">
+          <strong class="card-text">Subtotal</strong>
+        </div>
+        <div class="col-md-3 text-right">
+          <span>{{ subTotal }}</span>
+        </div>
+      </div>
+      <div class="row mt-2">
+        <div class="col-md-9">
+          <strong class="card-text">Shipping</strong>
+        </div>
+        <div class="col-md-3 text-right">
+          <span>{{ shipping }}</span>
+        </div>
+      </div>
+      <div class="row mt-2">
+        <div class="col-md-9"><strong class="card-text">Total</strong></div>
+        <div class="col-md-3 text-right">
+          <span>{{ subTotal + shipping }}</span>
+        </div>
+      </div>
+    </div>
+    <button type="submit" class="btn btn-dark me-2" (click)="onViewCart()">View cart</button>
+    <button type="button" class="btn btn-dark btn-pill">
+      Checkout
+    </button>
+  </div>
+
+<div class="mt-5">
+<ng-template #noItem>
+    <h4 class="text-center"> Your shopping cart is empty! </h4>
+</ng-template>
+</div>

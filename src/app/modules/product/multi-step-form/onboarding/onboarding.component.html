@@ -1,0 +1,7 @@
+<div class="container mt-5">
+  <app-account *ngIf="mutiStepService.currentForm === 'account'"></app-account>
+
+  <app-personal
+    *ngIf="mutiStepService.currentForm === 'personal'"
+  ></app-personal>
+</div>

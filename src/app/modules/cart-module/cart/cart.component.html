@@ -1,0 +1,102 @@
+<div class="container">
+<!-- <h1>Shopping Cart</h1> -->
+<app-header-title title="Shopping Cart"></app-header-title>
+
+<div *ngIf="cartService.cartItems.length; else noItem">
+    <table class="table table-bordered mt-3 text-center">
+      <thead>
+        <tr class="header">
+          <th>Name</th>
+          <th>Image</th>
+          <th>Price</th>
+          <th>Color</th>
+          <th>Quantity</th>
+          <th>Total</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of cartService.cartItems">
+          <td>
+            {{ item.name }}
+          </td>
+          <td><img src="{{ item.image }}" width="200px" height="200px" /></td>
+          <td>{{ item.price }}</td>
+          <td>{{ item.color }}</td>
+          <td>
+            <div class="form-group text-center row">
+              <div class="col-sm-1">
+                <i-bs
+                  name="plus"
+                  width="20"
+                  height="20"
+                  (click)="onPlus(item.id)"
+                ></i-bs>
+              </div>
+              <div class="col-sm-2">
+                <input
+                  class="form-control text-center"
+                  type="text"
+                  value="{{ item.quantity }}"
+                  (keypress)="onQuantity($event)"
+                  (change)="onKeyup(item.id)"
+                  #inputQuantity
+                />
+              </div>
+              <div class="col-sm-1">
+                <i-bs
+                  name="dash"
+                  width="20"
+                  height="20"
+                  (click)="onMins(item.id)"
+                >
+                </i-bs>
+              </div>
+            </div>
+          </td>
+          <td>{{ item.quantity ? item.quantity * item.price : 0 }}</td>
+          <td>
+            <button class="btn btn-dark" (click)="onDelete(item.id)">
+              Delete
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="card cartTotal" style="width: 18rem">
+      <h4 class="card-title">Cart Totals</h4>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-8">
+            <strong class="card-text">Subtotal</strong>
+          </div>
+          <div class="col-md-4 text-right">
+            <span>{{ subTotal }}</span>
+          </div>
+        </div>
+        <div class="row mt-2">
+          <div class="col-md-8">
+            <strong class="card-text">Shipping</strong>
+          </div>
+          <div class="col-md-4 text-right">
+            <span>{{ shipping }}</span>
+          </div>
+        </div>
+        <hr />
+        <div class="row">
+          <div class="col-md-7"><strong class="card-text">Total</strong></div>
+          <div class="col-md-5 text-right total">
+            <span>{{ subTotal + shipping }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<ng-template #noItem>
+  <div class="mt-5">
+    <h1 class="text-center">Cart is empty! Please add the item.</h1>
+  </div>
+</ng-template>
+</div>

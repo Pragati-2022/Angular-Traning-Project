@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CustomValidator } from '../../shared/custom-validators/custom.validator';
-
+import Swal from "sweetalert2"
+import { CommonService } from 'src/app/core/services/common/common.service';
 @Component({
   selector: 'app-contact',
   templateUrl: './contact.component.html',
-  styleUrls: ['./contact.component.scss'],
+  styleUrls: ['./contact.component.scss']
 })
 export class ContactComponent implements OnInit {
   contactForm!: FormGroup;
@@ -18,12 +19,12 @@ export class ContactComponent implements OnInit {
     { label: 'password', type: 'password' },
     { label: 'confirmPassword', type: 'password' },
     { label: 'age', type: 'text' },
-    { label: 'birthDate'},
-    { label: 'gender', type: 'radio', value : [ 'male', 'female'] },
-    { label: 'tnc', type: 'checkbox' },
+    { label: 'birthDate' },
+    { label: 'gender', type: 'radio', value: ['male', 'female'] },
+    { label: 'tnc', type: 'checkbox' }
   ];
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private formBuilder: FormBuilder, private commonService : CommonService) {
     this.maxDate = new Date();
     this.maxDate.setDate(this.maxDate.getDate() - 1);
   }
@@ -35,43 +36,15 @@ export class ContactComponent implements OnInit {
   initialization() {
     this.contactForm = this.formBuilder.group(
       {
-        name: [
-          '',
-          [
-            Validators.required,
-            Validators.minLength(2),
-            Validators.maxLength(10),
-          ],
-        ],
+        name: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(10)]],
         email: ['', [Validators.required, Validators.email]],
         details: ['', [Validators.required]],
-        password: [
-          '',
-          [
-            Validators.required,
-            Validators.minLength(2),
-            Validators.maxLength(10),
-          ],
-        ],
-        confirmPassword: [
-          '',
-          [
-            Validators.required,
-            Validators.minLength(2),
-            Validators.maxLength(10),
-          ],
-        ],
-        age: [
-          '',
-          [
-            Validators.required,
-            Validators.pattern('^[0-9]*$'),
-            Validators.min(1),
-          ],
-        ],
+        password: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(10)]],
+        confirmPassword: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(10)]],
+        age: ['', [Validators.required, Validators.pattern('^[0-9]*$'), Validators.min(1)]],
         birthDate: ['', [Validators.required]],
         gender: ['', [Validators.required]],
-        tnc: ['', [Validators.required]],
+        tnc: ['', [Validators.required]]
       },
       { validator: CustomValidator.passwordMatch }
     );
@@ -83,19 +56,27 @@ export class ContactComponent implements OnInit {
 
   onSubmit() {
     this.isFormSubmitted = true;
-    console.log(this.contactForm.value);
-    console.log(this._contactForm['tnc'].valid);
 
-
-    if (this.contactForm.valid) {
-      alert('Successfiully submitted!');
-      console.log(this.contactForm.value);
-
-      console.log(this._contactForm['birthDate'].value.getDate());
-
+    if (this.contactForm.invalid) {
+      return;
+    }
+    Swal.fire({
+      title: this.commonService.getTranslateData("TITLE.SURE_TITLE"),
+      showDenyButton: true,
+      showCancelButton: true,
+      confirmButtonText: this.commonService.getTranslateData("BUTTON.YES"),
+      denyButtonText: this.commonService.getTranslateData("BUTTON.NO")
+    }).then((result) => {
+      let data =  this.contactForm.value;
       this.initialization();
       this.isFormSubmitted = false;
-    }
+      if (result.isConfirmed) {
+        console.log(data);
+        Swal.fire(this.commonService.getTranslateData("TITLE.CONFIRM_TITLE"), '', 'success');
+      } else if (result.isDenied) {
+        Swal.fire(this.commonService.getTranslateData("TITLE.CANCEL_TITLE"), '', 'info');
+      }
+    });
   }
 
   onClear() {
@@ -104,7 +85,6 @@ export class ContactComponent implements OnInit {
   }
 
   myValidationFunction(event: any, label: string) {
-
     if (label == 'age') {
       try {
         let k;

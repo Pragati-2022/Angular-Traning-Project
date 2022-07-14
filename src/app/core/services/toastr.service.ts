@@ -22,16 +22,15 @@ export class ToasterService {
   }
 
   toasterClickedHandler(action?: IAction) {
-    console.log('Toastr clicked', action);
-    if (action?.isNavigation) this.router.navigate(['cart']);
+    if (action?.isNavigation) this.router.navigate([action.path]);
   }
 
   toasterError(msg: string) {
     this.toastr.error(msg);
   }
 
-  toasterInfo() {
-    this.toastr.info('This is info', 'This is info');
+  toasterInfo(msg : string) {
+    this.toastr.info(msg);
   }
 
   toasterWarning(msg: string) {

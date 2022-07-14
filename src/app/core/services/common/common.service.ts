@@ -11,9 +11,7 @@ export class CommonService {
 
   getTranslateData(text : string){
     this.translateService.get(text).pipe().subscribe((value) => {
-      this.translation = value;
-      console.log("Translation",this.translation);
-      
+      this.translation = value;      
     });
     return this.translation;
   } 

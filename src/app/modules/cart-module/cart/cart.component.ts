@@ -1,5 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { CartService } from 'src/app/core/services/cart.service';
+import { CommonService } from 'src/app/core/services/common/common.service';
 import { ToasterService } from 'src/app/core/services/toastr.service';
 
 @Component({
@@ -15,7 +16,8 @@ export class CartComponent implements OnInit {
 
   constructor(
     public cartService: CartService,
-    private toastrService: ToasterService
+    private toastrService: ToasterService,
+    private commomService : CommonService
   ) {}
 
   ngOnInit(): void {
@@ -60,8 +62,6 @@ export class CartComponent implements OnInit {
   }
 
   onQuantity(event: any) {
-    console.log(event.key);
-
     try {
       let k;
       if (/^[0-9]*$/.test(event.key)) {
@@ -76,20 +76,18 @@ export class CartComponent implements OnInit {
   }
 
   onKeyup(id: number) {
-    console.log(this.inputQuantity.nativeElement.value);
-
     let index: number = this.cartService.cartItems.findIndex(
       (product) => product.id === id
     );
 
     if (this.inputQuantity.nativeElement.value == 0) {
-      this.toastrService.toasterWarning("Can't enter 0 quantity!!");
+      this.toastrService.toasterWarning(this.commomService.getTranslateData("MESSAGE.WARNING_0"));
       this.cartService.cartItems[index].quantity = 1;
     } else {
       this.cartService.cartItems[index].quantity = Number(
         this.inputQuantity.nativeElement.value
       );
-      this.toastrService.toasterSuccess('Successfully changed quantity!!');
+      this.toastrService.toasterSuccess(this.commomService.getTranslateData("MESSAGE.SUCCESS_QUANTITY"));
     }
 
     this.subTotal = 0;

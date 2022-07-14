@@ -8,7 +8,10 @@
   "BUTTON": {
     "LOGIN": "Signin",
     "NEXT": "Next",
-    "SUBMIT" : "Submit"
+    "SUBMIT" : "Submit",
+    "YES" : "Yes",
+    "NO" : "No",
+    "CANCEL" : "Cancel"
   },
   "TITLE": {
     "HOME": "Home",
@@ -20,6 +23,10 @@
     "MULTISTEP": "MultiStep",
     "ARRAY_METHODS" : "Array Methods",
     "LOGIN": "Login",
+    "SURE_TITLE" : "Are you sure?",
+    "CONFIRM_TITLE" : "Saved!",
+    "CANCEL_TITLE" : "Not Saved!",
+    "DELETE_TITLE" : "Deleted!",
     "CHOOSE_LANG": "Choose Lang",
     "CHOOSE_LANG_LINK": {
       "ENGLISH": "English",
@@ -50,6 +57,16 @@
     "REQUIRED": "is required !",
     "EMAIL": "is invalid !",
     "MINLENGTH" : "at least 6 characters long !",
-    "MAXLENGTH" : "length maximum is 20 !"
+    "MAXLENGTH" : "length maximum is 20 !",
+    "DELETE_MSG" : "Successfully deleted!",
+    "WARNING_MSG":"You won't be able to revert this!",
+    "SUCCESS_LOGGIN": "Successfully loggedin!!",
+    "SUCCESS_QUANTITY": "Successfully changed quantity!!",
+    "SUCCESS_CART": "Successfully added cart item!!",
+    "ERROR_DELETE": "Cart item is deleted!!",
+    "ERROR_ISSUE": "There is any issue!!",
+    "ERROR_INVALID": "Invalid Data!",
+    "WARNING_0": "Maximum quantity one!!",
+    "WARNING_CART" : "Item minus from cart!!"
   }
 }

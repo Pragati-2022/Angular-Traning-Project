@@ -1,10 +1,7 @@
-<!-- <h1 class="text-center">Hello</h1> -->
-
-<!-- <alert type="success">Welcome To ngx-bootstrap</alert>   -->
-
-<app-header></app-header>
-<h1>{{ title }}</h1>
-
-<router-outlet></router-outlet>
-
+<app-header ngxUiLoaderBlurred [blur]="10"></app-header>
+<h1  ngxUiLoaderBlurred [blur]="10">{{ title }}</h1>
+<div ngxUiLoaderBlurred [blur]="10">
+    <router-outlet></router-outlet>
+</div>
+<ngx-ui-loader></ngx-ui-loader>
 <app-footer></app-footer>

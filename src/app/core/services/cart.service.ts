@@ -2,6 +2,7 @@ import { Injectable, OnInit } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { ICart } from 'src/app/modules/shared/model/cart';
 import { IAction } from 'src/app/modules/shared/model/user';
+import { CommonService } from './common/common.service';
 import { ToasterService } from './toastr.service';
 
 @Injectable({
@@ -13,7 +14,7 @@ export class CartService {
   private favouriteTotal = new BehaviorSubject(0);
   favouriteTotal$ = this.favouriteTotal.asObservable();
 
-  constructor(private toastrService: ToasterService) {
+  constructor(private toastrService: ToasterService, private commomService : CommonService) {
     for (let i = 0; i < this.cartItems.length; i++) {
       this.count += this.cartItems[i].quantity || 0;
     }
@@ -38,7 +39,7 @@ export class CartService {
       isNavigation : true,
       path : "cart",
     }
-    this.toastrService.toasterSuccess('Added to cart succesfully!!', passAction );
+    this.toastrService.toasterSuccess(this.commomService.getTranslateData("MESSAGE.SUCCESS_CART"), passAction );
   }
 
   clearCart() {
@@ -52,9 +53,9 @@ export class CartService {
     if (index != -1 && index != null) {
       this.count = this.count - (this.cartItems[index].quantity || 0);
       this.cartItems.splice(index, 1);
-      this.toastrService.toasterError('Cart item is deleted!!');
+      this.toastrService.toasterError(this.commomService.getTranslateData("MESSAGE.ERROR_DELETE"));
     } else {
-      this.toastrService.toasterError('There is any issue!!');
+      this.toastrService.toasterError(this.commomService.getTranslateData("MESSAGE.ERROR_ISSUE"));
     }
   }
 
@@ -67,9 +68,9 @@ export class CartService {
 
       this.cartItems[index].quantity = quantity;
       this.count = this.count + 1;
-      this.toastrService.toasterSuccess('Successfully plused the cart item!!');
+      this.toastrService.toasterSuccess(this.commomService.getTranslateData("MESSAGE.SUCCESS_CART"));
     } else {
-      this.toastrService.toasterError('There is any issue!!');
+      this.toastrService.toasterError(this.commomService.getTranslateData("MESSAGE.ERROR_ISSUE"));
     }
   }
 
@@ -82,10 +83,10 @@ export class CartService {
 
       if (quantity > 0) {
         this.cartItems[index].quantity = quantity;
-        this.toastrService.toasterWarning('Item minus from cart!!');
+        this.toastrService.toasterWarning(this.commomService.getTranslateData("MESSAGE.WARNING_CART"));
         this.count = this.count - 1;
       } else {
-        this.toastrService.toasterWarning('Max quantity is one!');
+        this.toastrService.toasterWarning(this.commomService.getTranslateData("MESSAGE.WARNING_0"));
       }
     }
   }

@@ -4,7 +4,7 @@
       <h4 class="card-title">{{ "login.title" | translate }}</h4>
       <div>
         <form class="mt-3" [formGroup]="loginForm">
-          <div class="form-group" *ngFor="let data of formData">
+          <!-- <div class="form-group" *ngFor="let data of formData">
             <label for="exampleInputEmail1"
               >{{ data.lang | translate }} :
             </label>
@@ -26,56 +26,44 @@
                 >{{ data.label }} is required</small
               >
             </small>
-          </div>
+          </div> -->
 
-          <!-- <div class="form-group">
+          <div class="form-group">
             <label for="exampleInputEmail1">
               {{ "login.username.label" | translate }} :
             </label>
-            <input
-              type="email"
-              formControlName="email"
-              class="form-control mt-2"
-              id="exampleInputEmail1"
-              placeholder=" {{ 'login.username.label' | translate }} "
-            />
-            <small
-              class="text-danger"
-              *ngIf="
+            <input type="email" formControlName="email" class="form-control mt-2" id="exampleInputEmail1"
+              placeholder=" {{ 'login.username.label' | translate }} " />
+            <small class="text-danger" *ngIf="
                 _loginForm['email'].invalid &&
                 (isFormSubmitted || _loginForm['email'].touched)
-              "
-            >
+              ">
               <small *ngIf="_loginForm['email'].errors?.['required']">
                 {{ "login.username.label" | translate }}
-                {{ "login.message" | translate }}</small
-              >
+                {{ "login.message" | translate }}</small>
             </small>
           </div>
           <div class="form-group mt-3">
-            <label for="exampleInputPassword1"
-              >{{ "login.password.label" | translate }} :
+            <label for="exampleInputPassword1">{{ "login.password.label" | translate }} :
             </label>
-            <input
-              type="password"
-              formControlName="password"
-              class="form-control mt-2"
-              id="exampleInputPassword1"
-              placeholder="{{ 'login.password.label' | translate }} "
-            />
-            <small
-              class="text-danger"
-              *ngIf="
+            <div class="input-group">
+              <input [type]="fieldTextType ? 'text' : 'password'" formControlName="password" class="form-control mt-2"
+                id="exampleInputPassword1" placeholder="{{ 'login.password.label' | translate }} " />
+              <div class=".input-group-addon w-18 p-2 border border-left-0 mt-2">
+                <i class="fa" [ngClass]="{
+                  'fa-eye-slash': !fieldTextType,
+                  'fa-eye': fieldTextType
+                }" (click)="toggleFieldTextType()"></i>
+              </div>
+            </div>
+            <small class="text-danger" *ngIf="
                 _loginForm['password'].invalid &&
                 (isFormSubmitted || _loginForm['password'].touched)
-              "
-            >
-              <small *ngIf="_loginForm['password'].errors?.['required']"
-                >{{ "login.password.label" | translate }}
-                {{ "login.message" | translate }}</small
-              >
+              ">
+              <small *ngIf="_loginForm['password'].errors?.['required']">{{ "login.password.label" | translate }}
+                {{ "login.message" | translate }}</small>
             </small>
-          </div> -->
+          </div>
 
           <button type="submit" (click)="onSubmit()" class="btn btn-dark mt-3">
             {{ "BUTTON.LOGIN" | translate }}

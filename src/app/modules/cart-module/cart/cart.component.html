@@ -1,5 +1,4 @@
 <div class="container">
-<!-- <h1>Shopping Cart</h1> -->
 <app-header-title title="Shopping Cart"></app-header-title>
 
 <div *ngIf="cartService.cartItems.length; else noItem">
@@ -20,7 +19,7 @@
           <td>
             {{ item.name }}
           </td>
-          <td><img src="{{ item.image }}" width="200px" height="200px" /></td>
+          <td><img src="{{ item.image }}" width="100px" height="100px" /></td>
           <td>{{ item.price }}</td>
           <td>{{ item.color }}</td>
           <td>

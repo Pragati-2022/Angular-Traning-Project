@@ -25,7 +25,6 @@ export class MultiSearchFilterPipe implements PipeTransform {
 
         return result;
       } else if (args && email) {
-        console.log('both2');
         let result: any[];
 
         args = args?.toLowerCase();

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 import { MutiStepService } from 'src/app/core/services/product/muti-step/muti-step.service';
@@ -37,8 +37,6 @@ export class AccountComponent{
     if (this.accountForm.invalid) {
       return false;
     }
-
-    console.log(this.accountForm.value);
     this.mutiStepService.currentForm = 'personal';
     this.isFormSubmitted = false;
     this.accountForm.reset();

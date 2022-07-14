@@ -1,11 +1,10 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CartService } from 'src/app/core/services/cart.service';
 import { UnsubscriberService } from 'src/app/core/services/common/Unsubscriber/unsubscriber.service';
 import { ProductService } from 'src/app/core/services/product.service';
 import { ICart } from '../../shared/model/cart';
-import { takeUntil, fromEvent, interval, timer } from 'rxjs';
-import { HomeService } from 'src/app/core/services/product/home/home.service';
+import { takeUntil} from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -13,10 +12,9 @@ import { HomeService } from 'src/app/core/services/product/home/home.service';
   styleUrls: ['./home.component.scss'],
   providers: [UnsubscriberService]
 })
-export class HomeComponent implements OnInit, OnDestroy {
+export class HomeComponent implements OnInit {
   arr = Array;
   count = 0;
-  private _chatSubscription : any ;
   design = {
     bgColor: 'Red',
     color: 'white'
@@ -28,34 +26,17 @@ export class HomeComponent implements OnInit, OnDestroy {
     public productService: ProductService,
     private cartService: CartService,
     private router: Router,
-    private active: ActivatedRoute,
+    private activatedRoute: ActivatedRoute,
     private readonly _unsubscriber: UnsubscriberService,
-    private readonly _homeService: HomeService
   ) {}
-  ngOnDestroy(): void {
-
-    // this._chatSubscription.unsubscribe();
-
-    setTimeout(() => {
-   console.log(this._chatSubscription.closed);   
-    }, 5000)
-  }
 
   ngOnInit(): void {
-    this.cartService
-      .getfavouriteTotal()
-      .pipe(takeUntil(this._unsubscriber.destroy$))
-      .subscribe();
-
-   this._chatSubscription = this._homeService.favouriteTotal$.subscribe();
-
-    // this._homeService.favouriteTotal$.pipe(takeUntil(this._unsubscriber.destroy$)).subscribe();
-
-   }
+    this.cartService.getfavouriteTotal().pipe(takeUntil(this._unsubscriber.destroy$)).subscribe();
+  }
 
   onProductDetail(id: number) {
     this.productService.id = id;
-    this.router.navigate(['/home/product', id], { relativeTo: this.active });
+    this.router.navigate(['/home/product', id], { relativeTo: this.activatedRoute });
   }
 
   onAddToCart(product: ICart) {
@@ -70,6 +51,4 @@ export class HomeComponent implements OnInit, OnDestroy {
   onBack() {
     this.img = '';
   }
-
-
 }

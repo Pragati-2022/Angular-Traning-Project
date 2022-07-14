@@ -11,7 +11,6 @@ export class FooterComponent {
   message = "It's Footer."
 
   onLongPress() {
-    // alert('Hello Long Press!');
     this.count++;
     console.log(this.count);
   }

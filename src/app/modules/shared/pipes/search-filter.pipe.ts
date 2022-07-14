@@ -13,11 +13,7 @@ export class SearchFilterPipe implements PipeTransform {
       args = args.toLowerCase();
       args = args.trim();
       console.log(args);
-      
-      // let result = value.filter((data) =>
-      //   data.name.toLowerCase().includes(args)
-      // );
-
+     
       let result = value.filter((data) => 
         data.name.toLowerCase().includes(args) || data.email.toLowerCase().includes(args));
 
